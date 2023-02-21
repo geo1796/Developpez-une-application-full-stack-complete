@@ -1,0 +1,9 @@
+<div *ngIf="loginMode">
+    <app-login></app-login>
+</div>
+<div *ngIf="!loginMode">
+    <app-registration></app-registration>
+</div>
+<button type="button" (click)="toggleAuthMode()">
+    {{loginMode ? 'Créer un compte' : 'Se connecter'}}
+</button>
