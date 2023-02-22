@@ -1,1 +1,26 @@
-<p>register works!</p>
+<div class="center">
+    <img src="/assets/logo_p6.png" alt="logo" class="responsive-image" />
+    <form [formGroup]="registerForm" (submit)="onSubmit()">`
+        <div class="row mb-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput type="text" id="username" formControlName="username">
+            </mat-form-field>
+        </div>
+        <div class="row mb-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Adresse e-mail</mat-label>
+                <input matInput type="text" id="email" formControlName="email">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" id="password" formControlName="password">
+            </mat-form-field>
+        </div>
+        <div class="text-center">
+            <button mat-raised-button color="primary" type="submit">S'inscrire</button>
+        </div>
+    </form>
+</div>
