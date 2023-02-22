@@ -30,7 +30,7 @@ public class RegisterController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         User newUser = userDetailsService.register(registerRequest);
-        String jwt = jwtUtil.generateTokenFromEmail(newUser.getEmail());
-        return ResponseEntity.ok(new LoginResponse(jwt));
+        LoginResponse loginResponse = jwtUtil.generateTokenFromEmail(newUser.getEmail());
+        return ResponseEntity.ok(loginResponse);
     }
 }

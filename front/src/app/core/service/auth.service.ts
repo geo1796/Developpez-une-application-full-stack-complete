@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { isBefore } from 'date-fns';
+import { BehaviorSubject } from 'rxjs';
+import { LoginResponse } from '../payload/response/login-response';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -10,23 +12,41 @@ export function tokenGetter() {
 })
 export class AuthService {
 
-  private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  
-  public get loggedIn$(): Observable<boolean> {
-    return this.loggedInSubject.asObservable();
-  }
+  readonly loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public get loggedIn(): boolean {
-    return this.loggedInSubject.value;
+    return this.loggedIn$.value;
   }
 
   public set loggedIn(b: boolean) {
-    this.loggedInSubject.next(b);
+    this.loggedIn$.next(b);
   }
 
   constructor() { }
 
-  public saveJwt(jwt: string): void {
-    localStorage.setItem("access_token", jwt); //required by auth0 library
+  public saveLoginResponse(loginResponse: LoginResponse): void {
+    localStorage.setItem("access_token", loginResponse.token); //required by auth0 library
+    localStorage.setItem("token_expiry", loginResponse.expiry);
+    setTimeout(() => this.loggedIn = false, Date.parse(loginResponse.expiry) - Date.now());
+  }
+
+  public tryAutoLogin(): void {
+    const token = localStorage.getItem("access_token");
+    const tokenExpiry = localStorage.getItem("token_expiry");
+    if (!token || !tokenExpiry) {
+      this.loggedIn = false;
+      return;
+    }
+    const expiryDate = Date.parse(tokenExpiry);
+    const now = Date.now();
+    if (isBefore(expiryDate, now)) {
+      this.loggedIn = false;
+      return;
+    }
+    this.loggedIn = true;
+    console.log(new Date(expiryDate))
+    console.log(new Date(now))
+    setTimeout(() => this.loggedIn = false, expiryDate - now);
+    return;
   }
 }

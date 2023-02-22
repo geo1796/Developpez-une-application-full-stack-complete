@@ -1,0 +1,41 @@
+<div *ngIf="(screenWidth$ | async)! >= 768">
+    <app-header></app-header>
+</div>
+
+<button mat-button routerLink="/" class="mt-3 ml-3">
+    <mat-icon style="font-size: 2em;">arrow_back</mat-icon>
+</button>
+
+<div class="horizontal-center mt-3">
+
+    <div *ngIf="(screenWidth$ | async)! <= 768">
+        <img src="/assets/logo_p6.png" alt="logo" class="responsive-image" />
+    </div>
+
+    <h1>Se connecter</h1>
+
+    <h3 *ngIf="onError" style="color:red">Désolé, une erreur est survenue.</h3>
+
+    <form [formGroup]="loginForm" (submit)="onSubmit()">`
+        <div class="row mb-4">
+            <mat-form-field appearance="outline">
+                <mat-label>E-mail ou nom d'utilisateur</mat-label>
+                <input matInput type="text" id="username" formControlName="username">
+                <mat-error *ngIf="usernameControl!.invalid && (usernameControl!.dirty || usernameControl!.touched)">Nom
+                    d'utilisateur ou adresse email requise</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" id="password" formControlName="password">
+                <mat-error *ngIf="passwordControl!.invalid && (passwordControl!.dirty || passwordControl!.touched)">Mot
+                    de passe requis</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="text-center">
+            <button mat-raised-button color="primary" type="submit" class="my-5"
+                [disabled]="loginForm.invalid">Se connecter</button>
+        </div>
+    </form>
+</div>

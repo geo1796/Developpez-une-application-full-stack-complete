@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.openclassrooms.mddapi.dto.response.LoginResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -22,12 +23,15 @@ public class JwtUtil {
     @Value("${security.jwtExpiration}")
     private int jwtExpiration;
 
-    public String generateTokenFromEmail(String email) {
-        return JWT.create()
+    public LoginResponse generateTokenFromEmail(String email) {
+        Instant now = Instant.now();
+        Instant expiry = now.plus(this.jwtExpiration, ChronoUnit.MILLIS);
+        String token = JWT.create()
                 .withSubject(email)
-                .withIssuedAt(Date.from(Instant.now()))
-                .withExpiresAt(Date.from(Instant.now().plus(this.jwtExpiration, ChronoUnit.MILLIS)))
+                .withIssuedAt(Date.from(now))
+                .withExpiresAt(Date.from(expiry))
                 .sign(Algorithm.HMAC256(this.jwtSecret));
+        return new LoginResponse(token, Date.from(expiry));
     }
 
     public String getUserEmailFromJwtToken(String jwt) {

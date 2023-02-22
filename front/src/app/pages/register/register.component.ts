@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { fromEvent, map, startWith } from 'rxjs';
-import { RegisterRequest } from 'src/app/core/payload/register-request';
+import { RegisterRequest } from 'src/app/core/payload/request/register-request';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RegisterService } from 'src/app/core/service/register.service';
 import { customEmailValidator } from 'src/app/core/validator/email-validator';
@@ -13,17 +14,18 @@ import { usernameValidator } from 'src/app/core/validator/username-validator';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   public onError: boolean = false;
-
-  constructor(private fb: FormBuilder, private registerService: RegisterService, private authService: AuthService) { }
 
   screenWidth$ = fromEvent(window, 'resize')
     .pipe(
       map(() => window.innerWidth),
       startWith(window.innerWidth)
     );
+
+  constructor(private fb: FormBuilder, private registerService: RegisterService, 
+    private authService: AuthService, private router: Router) { }
 
   public registerForm = this.fb.group({
     username: ['', [Validators.required, usernameValidator()]],
@@ -43,15 +45,14 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('password');
   }
 
-  ngOnInit(): void { }
-
   onSubmit(): void {
     const request: RegisterRequest = new RegisterRequest(this.registerForm.value.username!,
       this.registerForm.value.email!, this.registerForm.value.password!);
     this.registerService.register(request).subscribe({
-      next: jwt => {
+      next: loginResponse => {
         this.authService.loggedIn = true;
-        this.authService.saveJwt(jwt);
+        this.authService.saveLoginResponse(loginResponse);
+        this.router.navigateByUrl('/article');
       },
       error: _ => this.onError = true
     });

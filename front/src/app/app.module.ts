@@ -16,6 +16,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { tokenGetter } from './core/service/auth.service';
 import { ArticleComponent } from './pages/article/article.component';
 import { TopicComponent } from './topic/topic.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TopicComponent } from './topic/topic.component';
     RegisterComponent,
     HeaderComponent,
     ArticleComponent,
-    TopicComponent
+    TopicComponent,
+    LoginComponent
   ],
   imports: [
     HttpClientModule,
