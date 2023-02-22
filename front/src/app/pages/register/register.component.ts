@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
     const request: RegisterRequest = new RegisterRequest(this.registerForm.value.username!,
       this.registerForm.value.email!, this.registerForm.value.password!);
     this.registerService.register(request).subscribe({
-      next: _ => { },
+      next: _ => {  },
       error: _ => this.onError = true
     });
   }
