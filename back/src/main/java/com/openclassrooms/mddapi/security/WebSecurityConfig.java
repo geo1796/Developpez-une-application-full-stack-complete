@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.security;
 
+import com.openclassrooms.mddapi.security.filter.JwtEntryPoint;
+import com.openclassrooms.mddapi.security.filter.JwtFilter;
 import com.openclassrooms.mddapi.service.impl.MyUserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,8 @@ public class WebSecurityConfig {
     @Autowired
     private MyUserDetailsServiceImpl myUserDetailsService;
 
-    //@Autowired
-    //private JwtEntryPoint unauthorizedHandler;
+    @Autowired
+    private JwtEntryPoint unauthorizedHandler;
 
     @Value("${allowed.origins}")
     private String[] allowedOrigins;
@@ -49,17 +51,17 @@ public class WebSecurityConfig {
         return authenticationProvider;
     }
 
-    //@Bean
-    //JwtFilter jwtFilter() {
-    //    return new JwtFilter();
-    //}
+    @Bean
+    JwtFilter jwtFilter() {
+        return new JwtFilter();
+    }
 
     @Bean
     public SecurityFilterChain securityWebFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(withDefaults())
                 .csrf().disable()
-                //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests((authz) -> authz
                         .antMatchers("/register/**", "/login/**").permitAll()
