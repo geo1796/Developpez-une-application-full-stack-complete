@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface MyUserDetailsService extends UserDetailsService {
     User getByEmail(String email);
     Optional<User> findByEmail(String email);
+    Optional<User> findByUsername(String username);
     User register(RegisterRequest registerRequest);
     Optional<User> findById(Integer userId);
 }

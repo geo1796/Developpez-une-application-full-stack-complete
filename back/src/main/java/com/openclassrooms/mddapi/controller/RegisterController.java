@@ -25,8 +25,9 @@ public class RegisterController {
 
     @PostMapping()
     ResponseEntity<LoginResponse> register(@RequestBody @Valid RegisterRequest registerRequest) {
-        Optional<User> optionalUser = userDetailsService.findByEmail(registerRequest.getEmail());
-        if (optionalUser.isPresent()) {
+        Optional<User> byEmail = userDetailsService.findByEmail(registerRequest.getEmail());
+        Optional<User> byUsername = userDetailsService.findByUsername(registerRequest.getUsername());
+        if (byUsername.isPresent() || byEmail.isPresent()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         User newUser = userDetailsService.register(registerRequest);

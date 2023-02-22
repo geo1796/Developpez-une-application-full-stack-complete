@@ -62,7 +62,7 @@ public class WebSecurityConfig {
                 //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests((authz) -> authz
-                        .antMatchers("/register/**").permitAll()
+                        .antMatchers("/register/**", "/login/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults());

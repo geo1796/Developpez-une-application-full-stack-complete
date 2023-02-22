@@ -9,7 +9,7 @@ import { LoginResponse } from '../payload/response/login-response';
 })
 export class LoginService {
 
-  private url: string = 'http://localhost:9000/api/register';
+  private url: string = 'http://localhost:9000/api/login';
 
   constructor(private http: HttpClient) { }
 
