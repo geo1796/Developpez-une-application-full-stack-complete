@@ -18,6 +18,13 @@ body {
     flex-direction: column;
 }
 
+.horizontal-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .responsive-image {
     max-width: 100%;
     height: auto;
