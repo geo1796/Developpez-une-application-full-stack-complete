@@ -5,6 +5,7 @@ import { RegisterRequest } from 'src/app/core/payload/register-request';
 import { RegisterService } from 'src/app/core/service/register.service';
 import { customEmailValidator } from 'src/app/core/validator/email-validator';
 import { passwordValidator } from 'src/app/core/validator/password-validator';
+import { usernameValidator } from 'src/app/core/validator/username-validator';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit {
     );
 
   public registerForm = this.fb.group({
-    username: ['', Validators.required],
+    username: ['', [Validators.required, usernameValidator()]],
     email: ['', [Validators.required, Validators.email, customEmailValidator()]],
     password: ['', [Validators.required, Validators.minLength(8), passwordValidator]]
   });
