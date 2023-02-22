@@ -11,14 +11,20 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { JwtModule } from "@auth0/angular-jwt";
 import { HeaderComponent } from './component/header/header.component';
+import { tokenGetter } from './core/service/auth.service';
+import { ArticleComponent } from './pages/article/article.component';
+import { TopicComponent } from './topic/topic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ArticleComponent,
+    TopicComponent
   ],
   imports: [
     HttpClientModule,
@@ -30,7 +36,14 @@ import { HeaderComponent } from './component/header/header.component';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:9000"],
+        disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
