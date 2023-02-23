@@ -1,4 +1,5 @@
-<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-list [cols]="(screenWidth$ | async)! >= 1024 ? 2 : 1"
+    [rowHeight]="(screenWidth$ | async)! >= 1024 ? '20vw' : '50vw'" gutterSize="10px">
     <mat-grid-tile *ngFor="let topic of topics">
         <app-topic-item [topic]="topic"></app-topic-item>
     </mat-grid-tile>

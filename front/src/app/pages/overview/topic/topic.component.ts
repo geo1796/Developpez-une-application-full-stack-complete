@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { fromEvent, map, startWith, Subscription } from "rxjs";
 import { Topic } from "src/app/core/payload/response/topic-response";
 import { TopicService } from "src/app/core/service/topic.service";
 
@@ -9,7 +9,12 @@ import { TopicService } from "src/app/core/service/topic.service";
   styleUrls: ['./topic.component.css']
 })
 export class TopicComponent implements OnInit, OnDestroy {
-  
+  screenWidth$ = fromEvent(window, 'resize')
+  .pipe(
+    map(() => window.innerWidth),
+    startWith(window.innerWidth)
+  );
+
   private topicSub!: Subscription;
   public onError: boolean = false;
   public topics: Topic[] = [];

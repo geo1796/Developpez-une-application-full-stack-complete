@@ -1,1 +1,13 @@
-<p>{{topic.name}}</p>
+<mat-card class="topic-card">
+    <mat-card-header>
+        <h3>{{topic.name}}</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <p class="topic-description">{{topic.description}}</p>
+    </mat-card-content>
+    <mat-card-footer>
+        <div class="text-center">
+            <button mat-raised-button color="primary">S'abonner</button>
+        </div>
+    </mat-card-footer>
+</mat-card>
