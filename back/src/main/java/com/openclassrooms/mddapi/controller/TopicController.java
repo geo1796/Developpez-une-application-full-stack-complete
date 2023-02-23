@@ -24,5 +24,4 @@ public class TopicController {
 		return topicService.getTopics();
 	}
 	
-	
 }

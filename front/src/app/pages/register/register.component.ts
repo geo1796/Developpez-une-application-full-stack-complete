@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { fromEvent, map, startWith } from 'rxjs';
+import { fromEvent, map, startWith, Subscription } from 'rxjs';
 import { RegisterRequest } from 'src/app/core/payload/request/register-request';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RegisterService } from 'src/app/core/service/register.service';
@@ -14,9 +14,10 @@ import { usernameValidator } from 'src/app/core/validator/username-validator';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
 
   public onError: boolean = false;
+  private registerSub?: Subscription;
 
   screenWidth$ = fromEvent(window, 'resize')
     .pipe(
@@ -45,14 +46,20 @@ export class RegisterComponent {
     return this.registerForm.get('password');
   }
 
+  ngOnDestroy(): void {
+    if (this.registerSub !== undefined) {
+      this.registerSub.unsubscribe();
+    }
+  }
+
   onSubmit(): void {
     const request: RegisterRequest = new RegisterRequest(this.registerForm.value.username!,
       this.registerForm.value.email!, this.registerForm.value.password!);
-    this.registerService.register(request).subscribe({
+    this.registerSub = this.registerService.register(request).subscribe({
       next: loginResponse => {
         this.authService.loggedIn = true;
         this.authService.saveLoginResponse(loginResponse);
-        this.router.navigateByUrl('/overview');
+        this.router.navigateByUrl('/overview?show=article');
       },
       error: _ => this.onError = true
     });
