@@ -1,1 +1,5 @@
-<p>topic works!</p>
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let topic of topics">
+        <app-topic-item [topic]="topic"></app-topic-item>
+    </mat-grid-tile>
+</mat-grid-list>

@@ -3,6 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +22,7 @@ import { ArticleComponent } from './pages/overview/article/article.component';
 import { TopicComponent } from './pages/overview/topic/topic.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OverviewComponent } from './pages/overview/overview.component';
+import { TopicItemComponent } from './pages/overview/topic/topic-item/topic-item.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { OverviewComponent } from './pages/overview/overview.component';
     ArticleComponent,
     TopicComponent,
     LoginComponent,
-    OverviewComponent
+    OverviewComponent,
+    TopicItemComponent
   ],
   imports: [
     HttpClientModule,
@@ -45,6 +49,8 @@ import { OverviewComponent } from './pages/overview/overview.component';
     MatInputModule,
     MatSidenavModule,
     MatListModule,
+    MatGridListModule,
+    MatCardModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

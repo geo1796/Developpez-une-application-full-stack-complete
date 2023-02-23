@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
+import { Topic } from "src/app/core/payload/response/topic-response";
 import { TopicService } from "src/app/core/service/topic.service";
 
 @Component({
@@ -11,12 +12,13 @@ export class TopicComponent implements OnInit, OnDestroy {
   
   private topicSub!: Subscription;
   public onError: boolean = false;
+  public topics: Topic[] = [];
 
   constructor(private topicService: TopicService){}
 
   ngOnInit(): void {
     this.topicSub = this.topicService.getTopics().subscribe({
-      next: data => console.log(data),
+      next: data => this.topics = data,
       error: _ => this.onError = true
     });
   }
