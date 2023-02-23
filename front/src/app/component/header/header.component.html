@@ -1,19 +1,23 @@
-<div class="row">
-    <div class="col"><img src="/assets/logo_p6.png" alt="logo" class="logo" /></div>
-    <div *ngIf="loggedIn" class="col mt-5">
-        <div class="float-end">
-            <div class="row px-5">
-                <div class="col">
-                    <a mat-button routerLink="/article" [color]="onArticles ? 'primary' : ''">Articles</a>
-                </div>
-                <div class="col">
-                    <a mat-button routerLink="/topic" [color]="onTopics ? 'primary' : ''">Thèmes</a>
-                </div>
-                <div class="col">
-                    <mat-icon>person_filled</mat-icon>
+<div>
+    <div class="row">
+        <div class="col mt-2"><img src="/assets/logo_p6.png" alt="logo" class="logo" /></div>
+        <div *ngIf="loggedIn" class="col mt-5">
+            <div class="float-end">
+                <div class="row px-5">
+                    <div class="col mt-2">
+                        <button mat-button (click)="navToOverview('article')" [color]="onArticles ? 'primary' : ''">Articles</button>
+                    </div>
+                    <div class="col mt-2">
+                        <button mat-button (click)="navToOverview('topic')" [color]="onTopics ? 'primary' : ''">Thèmes</button>
+                    </div>
+                    <div class="col">
+                        <button mat-fab color="" class="mb-1">
+                            <mat-icon>person_filled</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <hr>
 </div>
-<hr>

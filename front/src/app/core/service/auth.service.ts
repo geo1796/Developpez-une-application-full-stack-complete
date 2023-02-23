@@ -44,8 +44,6 @@ export class AuthService {
       return;
     }
     this.loggedIn = true;
-    console.log(new Date(expiryDate))
-    console.log(new Date(now))
     setTimeout(() => this.loggedIn = false, expiryDate - now);
     return;
   }

@@ -6,5 +6,4 @@ import { Component } from "@angular/core";
   styleUrls: ['./topic.component.css']
 })
 export class TopicComponent {
-
 }

@@ -1,0 +1,50 @@
+<div *ngIf="(screenWidth$ | async)! >= 768">
+    <app-header></app-header>
+    <ng-container *ngTemplateOutlet="mainContent"></ng-container>
+</div>
+
+<div *ngIf="(screenWidth$ | async)! < 768">
+    <!-- Sidenav -->
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="over" class="sidenav" [fixedInViewport]="false" position="end">
+            <mat-nav-list class="float-end mt-5">
+                <div mat-list-item>
+                    <button mat-button (click)="navToOverview('article'); sidenav.close();"
+                        [color]="onArticles ? 'primary' :''">Articles</button>
+                </div>
+                <div mat-list-item>
+                    <button mat-button (click)="navToOverview('topic'); sidenav.close();"
+                        [color]="onTopics ? 'primary' : ''">Thèmes</button>
+                </div>
+                <div class="profile">
+                    <button mat-fab color="" class="mb-2 mx-1">
+                        <mat-icon>person_filled</mat-icon>
+                    </button>
+                </div>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <main>
+                <div class="row mt-2 mx-1">
+                    <div class="col">
+                        <img src="/assets/logo_p6.png" alt="logo" class="mobile-logo" />
+                    </div>
+                    <div class="col">
+                        <div class="float-end">
+                            <button mat-icon-button (click)="sidenav.toggle()">
+                                <mat-icon>menu</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <ng-container *ngTemplateOutlet="mainContent"></ng-container>
+            </main>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+<ng-template #mainContent>
+    <app-article *ngIf="onArticles"></app-article>
+    <app-topic *ngIf="onTopics"></app-topic>
+</ng-template>

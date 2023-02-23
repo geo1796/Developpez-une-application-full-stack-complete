@@ -52,7 +52,7 @@ export class RegisterComponent {
       next: loginResponse => {
         this.authService.loggedIn = true;
         this.authService.saveLoginResponse(loginResponse);
-        this.router.navigateByUrl('/article');
+        this.router.navigateByUrl('/overview');
       },
       error: _ => this.onError = true
     });

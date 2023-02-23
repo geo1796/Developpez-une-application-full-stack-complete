@@ -9,16 +9,15 @@ import { AuthService } from 'src/app/core/service/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   public loggedIn: boolean;
   private loggedInSub!: Subscription;
 
   public get onTopics(): boolean {
-    return this.router.url.includes('topic');
+    return this.router.url.includes('overview?show=topic');
   }
 
   public get onArticles(): boolean {
-    return this.router.url.includes('article');
+    return this.router.url.includes('overview?show=article');
   }
 
   constructor(private authService: AuthService, private router: Router) {
@@ -31,6 +30,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.loggedInSub.unsubscribe();
+  }
+
+  public navToOverview(show: string): void {
+    this.router.navigateByUrl('/overview?show=' + show);
   }
 
 }
