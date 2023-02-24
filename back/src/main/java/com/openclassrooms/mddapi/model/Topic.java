@@ -26,7 +26,7 @@ public class Topic {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false, length = 500)
+	@Column(nullable = false)
 	private String description;
 	
 }

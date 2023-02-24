@@ -1,34 +1,20 @@
 .topic-card {
     background-color: #d3d3d380;
     margin: 16px;
-    height: 19vw;
+    height: 340px;
     width: 45vw;
 }
 
-p.topic-description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 3;
-    /* Number of lines to show */
-    text-overflow: ellipsis;
-}
+
 
 @media (max-width: 1023px) {
     .topic-card {
         /* Styles for screens smaller than 1024px */
-        height: 49vw;
         width: 80vw;
     }
 
     button.follow {
         right: 35%;
         left: 35%;
-    }
-}
-
-@media (max-width: 374px) {
-    p.topic-description {
-        -webkit-line-clamp: 1;
     }
 }
