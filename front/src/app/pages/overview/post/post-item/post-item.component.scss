@@ -1,4 +1,4 @@
-.topic-card {
+.post-card {
     background-color: #d3d3d380;
     margin: 16px;
     height: 340px;
@@ -8,7 +8,7 @@
 
 
 @media (max-width: 1023px) {
-    .topic-card {
+    .post-card {
         /* Styles for screens smaller than 1024px */
         width: 80vw;
     }

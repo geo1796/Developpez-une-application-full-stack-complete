@@ -1,0 +1,12 @@
+<mat-card class="post-card">
+    <mat-card-header>
+        <h3>{{post.name}}</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row mb-2">
+            <div class="col">{{postDate}}</div>
+            <div class="col">{{post.author.username}}</div>
+        </div>
+        <p>{{post.content}}</p>
+    </mat-card-content>
+</mat-card>

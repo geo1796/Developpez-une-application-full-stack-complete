@@ -38,5 +38,9 @@ public class Post {
 	private String content;
 
 	@CreationTimestamp
-	private Date createdAt;
+	private Date date;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User author;
 }

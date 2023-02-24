@@ -1,9 +1,12 @@
 package com.openclassrooms.mddapi;
 
+import com.openclassrooms.mddapi.dto.request.RegisterRequest;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
+import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.PostRepository;
 import com.openclassrooms.mddapi.repository.TopicRepository;
+import com.openclassrooms.mddapi.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +21,9 @@ public class MddApiApplication implements CommandLineRunner {
     private TopicRepository topicRepository;
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private MyUserDetailsService userDetailsService;
 
     public static void main(String[] args) {
         SpringApplication.run(MddApiApplication.class, args);
@@ -40,13 +46,15 @@ public class MddApiApplication implements CommandLineRunner {
 
         topicRepository.saveAll(dummyTopics);
 
+        User user = userDetailsService.register(new RegisterRequest("bob", "bob.sponge@test.com", "Gary123!"));
+
         List<Post> dummyPosts = List.of(
-                Post.builder().name("Article 1").topic(dummyTopics.get(0)).content(dummyDescription).build(),
-                Post.builder().name("Article 2").topic(dummyTopics.get(1)).content(dummyDescription).build(),
-                Post.builder().name("Article 3").topic(dummyTopics.get(2)).content(dummyDescription).build(),
-                Post.builder().name("Article 4").topic(dummyTopics.get(3)).content(dummyDescription).build(),
-                Post.builder().name("Article 5").topic(dummyTopics.get(4)).content(dummyDescription).build(),
-                Post.builder().name("Article 6").topic(dummyTopics.get(5)).content(dummyDescription).build()
+                Post.builder().name("Article 1").topic(dummyTopics.get(0)).content(dummyDescription).author(user).build(),
+                Post.builder().name("Article 2").topic(dummyTopics.get(1)).content(dummyDescription).author(user).build(),
+                Post.builder().name("Article 3").topic(dummyTopics.get(2)).content(dummyDescription).author(user).build(),
+                Post.builder().name("Article 4").topic(dummyTopics.get(3)).content(dummyDescription).author(user).build(),
+                Post.builder().name("Article 5").topic(dummyTopics.get(4)).content(dummyDescription).author(user).build(),
+                Post.builder().name("Article 6").topic(dummyTopics.get(5)).content(dummyDescription).author(user).build()
         );
 
         postRepository.saveAll(dummyPosts);
