@@ -1,5 +1,9 @@
 package com.openclassrooms.mddapi.service;
 
-public interface PostService {
+import com.openclassrooms.mddapi.model.Post;
 
+import java.util.List;
+
+public interface PostService {
+    List<Post> getPosts();
 }

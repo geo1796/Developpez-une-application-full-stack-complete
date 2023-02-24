@@ -1,5 +1,8 @@
 package com.openclassrooms.mddapi.model;
 
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "posts")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
 
 	@Id
@@ -21,24 +30,13 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "topic_id")
 	private Topic topic;
-	
-	// TODO : to finish...
 
-	public Long getId() {
-		return id;
-	}
+	@Column(nullable = false)
+	private String name;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@Column(nullable = false)
+	private String content;
 
-	public Topic getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Topic topic) {
-		this.topic = topic;
-	}
-		
-	
+	@CreationTimestamp
+	private Date createdAt;
 }
