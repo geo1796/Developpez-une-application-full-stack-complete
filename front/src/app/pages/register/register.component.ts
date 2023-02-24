@@ -59,7 +59,7 @@ export class RegisterComponent implements OnDestroy {
       next: loginResponse => {
         this.authService.loggedIn = true;
         this.authService.saveLoginResponse(loginResponse);
-        this.router.navigateByUrl('/overview?show=article');
+        this.router.navigateByUrl('/overview?show=post');
       },
       error: _ => this.onError = true
     });

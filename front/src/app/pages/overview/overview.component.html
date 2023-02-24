@@ -9,8 +9,8 @@
         <mat-sidenav #sidenav mode="over" class="sidenav" [fixedInViewport]="false" position="end">
             <mat-nav-list class="float-end mt-5">
                 <div mat-list-item>
-                    <button mat-button (click)="navToOverview('article'); sidenav.close();"
-                        [color]="onArticles ? 'primary' :''">Articles</button>
+                    <button mat-button (click)="navToOverview('post'); sidenav.close();"
+                        [color]="onPosts ? 'primary' :''">Articles</button>
                 </div>
                 <div mat-list-item>
                     <button mat-button (click)="navToOverview('topic'); sidenav.close();"
@@ -45,6 +45,6 @@
 </div>
 
 <ng-template #mainContent>
-    <app-article *ngIf="onArticles"></app-article>
+    <app-post *ngIf="onPosts"></app-post>
     <app-topic *ngIf="onTopics"></app-topic>
 </ng-template>

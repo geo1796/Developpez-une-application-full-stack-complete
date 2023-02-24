@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.router.url.includes('overview?show=topic');
   }
 
-  public get onArticles(): boolean {
-    return this.router.url.includes('overview?show=article');
+  public get onPosts(): boolean {
+    return this.router.url.includes('overview?show=post');
   }
 
   constructor(private authService: AuthService, private router: Router) {

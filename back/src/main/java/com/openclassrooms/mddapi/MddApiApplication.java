@@ -1,6 +1,8 @@
 package com.openclassrooms.mddapi;
 
+import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
+import com.openclassrooms.mddapi.repository.PostRepository;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +16,8 @@ public class MddApiApplication implements CommandLineRunner {
 
     @Autowired
     private TopicRepository topicRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MddApiApplication.class, args);
@@ -35,5 +39,16 @@ public class MddApiApplication implements CommandLineRunner {
         );
 
         topicRepository.saveAll(dummyTopics);
+
+        List<Post> dummyPosts = List.of(
+                Post.builder().name("Article 1").topic(dummyTopics.get(0)).content(dummyDescription).build(),
+                Post.builder().name("Article 2").topic(dummyTopics.get(1)).content(dummyDescription).build(),
+                Post.builder().name("Article 3").topic(dummyTopics.get(2)).content(dummyDescription).build(),
+                Post.builder().name("Article 4").topic(dummyTopics.get(3)).content(dummyDescription).build(),
+                Post.builder().name("Article 5").topic(dummyTopics.get(4)).content(dummyDescription).build(),
+                Post.builder().name("Article 6").topic(dummyTopics.get(5)).content(dummyDescription).build()
+        );
+
+        postRepository.saveAll(dummyPosts);
     }
 }

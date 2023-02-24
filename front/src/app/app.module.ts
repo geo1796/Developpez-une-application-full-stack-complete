@@ -18,11 +18,12 @@ import { MatListModule } from '@angular/material/list';
 import { JwtModule } from "@auth0/angular-jwt";
 import { HeaderComponent } from './component/header/header.component';
 import { tokenGetter } from './core/service/auth.service';
-import { ArticleComponent } from './pages/overview/article/article.component';
+import { PostComponent } from './pages/overview/post/post.component';
 import { TopicComponent } from './pages/overview/topic/topic.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { TopicItemComponent } from './pages/overview/topic/topic-item/topic-item.component';
+import { PostItemComponent } from './pages/overview/post/post-item/post-item.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +31,12 @@ import { TopicItemComponent } from './pages/overview/topic/topic-item/topic-item
     HomeComponent,
     RegisterComponent,
     HeaderComponent,
-    ArticleComponent,
+    PostComponent,
     TopicComponent,
     LoginComponent,
     OverviewComponent,
-    TopicItemComponent
+    TopicItemComponent,
+    PostItemComponent
   ],
   imports: [
     HttpClientModule,
