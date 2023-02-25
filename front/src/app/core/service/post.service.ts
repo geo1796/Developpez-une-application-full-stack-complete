@@ -12,7 +12,11 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  getTopics(): Observable<Post[]> {
+  getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.url);
+  }
+
+  getPost(id: number): Observable<Post> {
+    return this.http.get<Post>(this.url + '/' + id);
   }
 }

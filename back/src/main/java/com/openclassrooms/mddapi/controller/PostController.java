@@ -4,6 +4,7 @@ import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,4 +22,8 @@ public class PostController {
         return postService.getPosts();
     }
 
+    @GetMapping("/{id}")
+    public Post getPost(@PathVariable Long id) {
+        return postService.getPost(id);
+    }
 }

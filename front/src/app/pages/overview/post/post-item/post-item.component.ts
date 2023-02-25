@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { format } from 'date-fns';
 import { Post } from 'src/app/core/payload/response/post-response';
 
@@ -7,17 +8,18 @@ import { Post } from 'src/app/core/payload/response/post-response';
   templateUrl: './post-item.component.html',
   styleUrls: ['./post-item.component.scss']
 })
-export class PostItemComponent implements OnInit {
+export class PostItemComponent {
 
   @Input() post!: Post;
 
   public get postDate(): string {
-    return format(Date.parse(this.post.date), "dd/MM/yyyy HH:mm");
+    return format(Date.parse(this.post.date), "dd/MM/yyyy");
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
+  navToDetails(): void {
+    this.router.navigateByUrl('/post-details?id=' + this.post.id);
   }
 
 }

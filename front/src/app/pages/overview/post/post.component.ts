@@ -23,7 +23,7 @@ export class PostComponent implements OnInit, OnDestroy {
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.postSub = this.postService.getTopics().subscribe({
+    this.postSub = this.postService.getPosts().subscribe({
       next: data => this.posts = data,
       error: _ => this.onError = true
     });

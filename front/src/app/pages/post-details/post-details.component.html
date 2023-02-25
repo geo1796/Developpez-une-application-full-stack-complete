@@ -9,12 +9,10 @@
         <mat-sidenav #sidenav mode="over" class="sidenav" [fixedInViewport]="true" position="end">
             <mat-nav-list class="float-end mt-5">
                 <div mat-list-item>
-                    <button mat-button (click)="navToOverview('post'); sidenav.close();"
-                        [color]="onPosts ? 'primary' :''">Articles</button>
+                    <button mat-button (click)="navToOverview('post'); sidenav.close();">Articles</button>
                 </div>
                 <div mat-list-item>
-                    <button mat-button (click)="navToOverview('topic'); sidenav.close();"
-                        [color]="onTopics ? 'primary' : ''">Thèmes</button>
+                    <button mat-button (click)="navToOverview('topic'); sidenav.close();">Thèmes</button>
                 </div>
                 <div class="profile">
                     <button mat-fab color="" class="mb-2 mx-1">
@@ -45,6 +43,40 @@
 </div>
 
 <ng-template #mainContent>
-    <app-post *ngIf="onPosts"></app-post>
-    <app-topic *ngIf="onTopics"></app-topic>
+    <div *ngIf="post !== undefined">
+        <div class="row">
+            <div class="col-2 px-1">
+                <button mat-button (click)="goBack()">
+                    <mat-icon style="font-size: 2em;">arrow_back</mat-icon>
+                </button>
+            </div>
+            <div class="col-9 pt-1">
+                <h1>{{post.name}}</h1>
+                <div class="row my-3" *ngIf="(screenWidth$ | async)! >= 1024">
+                    <div class="col-2">
+                        {{postDate}}
+                    </div>
+                    <div class="col-2">
+                        {{post.author.username}}
+                    </div>
+                    <div class="col-2">
+                        {{post.topic.name}}
+                    </div>
+                </div>
+                <div class="row" *ngIf="(screenWidth$ | async)! < 1024">
+                    <div class="col-6">
+                        {{postDate}}
+                    </div>
+                    <div class="col-6">
+                        {{post.author.username}}
+                    </div>
+                    <div class="col-6 my-2">
+                        {{post.topic.name}}
+                    </div>
+                </div>
+                <p>Content: {{post.content}}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
 </ng-template>

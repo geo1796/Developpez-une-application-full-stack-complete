@@ -24,6 +24,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { TopicItemComponent } from './pages/overview/topic/topic-item/topic-item.component';
 import { PostItemComponent } from './pages/overview/post/post-item/post-item.component';
+import { NewPostComponent } from './pages/new-post/new-post.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { PostItemComponent } from './pages/overview/post/post-item/post-item.com
     LoginComponent,
     OverviewComponent,
     TopicItemComponent,
-    PostItemComponent
+    PostItemComponent,
+    NewPostComponent,
+    PostDetailsComponent
   ],
   imports: [
     HttpClientModule,

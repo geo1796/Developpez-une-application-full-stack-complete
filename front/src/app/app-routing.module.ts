@@ -5,6 +5,7 @@ import { unauthGuard } from './guard/unauth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OverviewComponent } from './pages/overview/overview.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [unauthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [unauthGuard] },
   { path: 'overview', component: OverviewComponent, canActivate: [authGuard] },
+  { path: 'post-details', component: PostDetailsComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({
