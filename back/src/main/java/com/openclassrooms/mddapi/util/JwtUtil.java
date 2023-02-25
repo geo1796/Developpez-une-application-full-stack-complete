@@ -23,18 +23,18 @@ public class JwtUtil {
     @Value("${security.jwtExpiration}")
     private int jwtExpiration;
 
-    public LoginResponse generateTokenFromEmail(String email) {
+    public LoginResponse generateTokenFromId(String id) {
         Instant now = Instant.now();
         Instant expiry = now.plus(this.jwtExpiration, ChronoUnit.MILLIS);
         String token = JWT.create()
-                .withSubject(email)
+                .withSubject(id)
                 .withIssuedAt(Date.from(now))
                 .withExpiresAt(Date.from(expiry))
                 .sign(Algorithm.HMAC256(this.jwtSecret));
         return new LoginResponse(token, Date.from(expiry));
     }
 
-    public String getUserEmailFromJwtToken(String jwt) {
+    public String getUserIdFromJwtToken(String jwt) {
         if (jwt == null){
             throw new JWTVerificationException("token is null");
         }

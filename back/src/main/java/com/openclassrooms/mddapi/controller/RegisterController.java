@@ -3,7 +3,8 @@ package com.openclassrooms.mddapi.controller;
 import com.openclassrooms.mddapi.dto.request.RegisterRequest;
 import com.openclassrooms.mddapi.dto.response.LoginResponse;
 import com.openclassrooms.mddapi.model.User;
-import com.openclassrooms.mddapi.service.MyUserDetailsService;
+import com.openclassrooms.mddapi.service.UserService;
+import com.openclassrooms.mddapi.service.security.MyUserDetailsService;
 import com.openclassrooms.mddapi.util.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,17 +22,18 @@ import java.util.Optional;
 @AllArgsConstructor
 public class RegisterController {
     private MyUserDetailsService userDetailsService;
+    private UserService userService;
     private JwtUtil jwtUtil;
 
     @PostMapping()
     ResponseEntity<LoginResponse> register(@RequestBody @Valid RegisterRequest registerRequest) {
-        Optional<User> byEmail = userDetailsService.findByEmail(registerRequest.getEmail());
-        Optional<User> byUsername = userDetailsService.findByUsername(registerRequest.getUsername());
+        Optional<User> byEmail = userService.findByEmail(registerRequest.getEmail());
+        Optional<User> byUsername = userService.findByUsername(registerRequest.getUsername());
         if (byUsername.isPresent() || byEmail.isPresent()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         User newUser = userDetailsService.register(registerRequest);
-        LoginResponse loginResponse = jwtUtil.generateTokenFromEmail(newUser.getEmail());
+        LoginResponse loginResponse = jwtUtil.generateTokenFromId(String.valueOf(newUser.getId()));
         return ResponseEntity.ok(loginResponse);
     }
 }

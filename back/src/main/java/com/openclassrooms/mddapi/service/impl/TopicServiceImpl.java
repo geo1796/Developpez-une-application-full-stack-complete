@@ -1,7 +1,9 @@
-package com.openclassrooms.mddapi.service;
+package com.openclassrooms.mddapi.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.openclassrooms.mddapi.service.TopicService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,10 @@ public class TopicServiceImpl implements TopicService {
 	public List<Topic> getTopics() {
 		return topicRepository.findAll();
 	}
-	
+
+	@Override
+	public Optional<Topic> findById(Long id) {
+		return topicRepository.findById(id);
+	}
+
 }
