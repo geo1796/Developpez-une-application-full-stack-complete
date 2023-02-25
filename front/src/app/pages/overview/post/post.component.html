@@ -1,23 +1,29 @@
-<div class="row m-3">
-    <div class="col-sm text-center mt-2">
-        <button mat-raised-button color="primary">Créer un article</button>
-    </div>
-    <div class="col-sm text-center mt-2">
-        <button mat-button (click)="sortPosts()">
-            <div class="row">
-                <div class="col">Trier par</div>
-                <div class="col pt-1">
-                    <mat-icon>
-                        {{orderAsc ? 'arrow_downward' : 'arrow_upward'}}
-                    </mat-icon>
+<div *ngIf="!onError">
+    <div class="row m-3">
+        <div class="col-sm text-center mt-2">
+            <button mat-raised-button color="primary">Créer un article</button>
+        </div>
+        <div class="col-sm text-center mt-2">
+            <button mat-button (click)="sortPosts()">
+                <div class="row gx-2">
+                    <div class="col">Trier par</div>
+                    <div class="col pt-1">
+                        <mat-icon>
+                            {{orderAsc ? 'arrow_downward' : 'arrow_upward'}}
+                        </mat-icon>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
+        </div>
     </div>
+
+    <mat-grid-list [cols]="(screenWidth$ | async)! >= 1024 ? 2 : 1" rowHeight="350px" gutterSize="10px">
+        <mat-grid-tile *ngFor="let post of posts">
+            <app-post-item [post]="post"></app-post-item>
+        </mat-grid-tile>
+    </mat-grid-list>
 </div>
 
-<mat-grid-list [cols]="(screenWidth$ | async)! >= 1024 ? 2 : 1" rowHeight="350px" gutterSize="10px">
-    <mat-grid-tile *ngFor="let post of posts">
-        <app-post-item [post]="post"></app-post-item>
-    </mat-grid-tile>
-</mat-grid-list>
+<div *ngIf="onError" class="text-center">
+    <p>Désolé, une erreur est survenue</p>
+</div>

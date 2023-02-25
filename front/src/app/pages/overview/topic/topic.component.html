@@ -1,5 +1,9 @@
-<mat-grid-list [cols]="(screenWidth$ | async)! >= 1024 ? 2 : 1" rowHeight="350px" gutterSize="10px">
+<mat-grid-list *ngIf="!onError" [cols]="(screenWidth$ | async)! >= 1024 ? 2 : 1" rowHeight="350px" gutterSize="10px">
     <mat-grid-tile *ngFor="let topic of topics">
         <app-topic-item [topic]="topic"></app-topic-item>
     </mat-grid-tile>
 </mat-grid-list>
+
+<div *ngIf="onError" class="text-center">
+    <p>Désolé, une erreur est survenue</p>
+</div>

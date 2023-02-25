@@ -7,7 +7,10 @@
     </mat-card-content>
     <mat-card-footer>
         <div class="text-center">
-            <button mat-raised-button color="primary">S'abonner</button>
+            <button *ngIf="!topic.followed" mat-raised-button color="primary" (click)="followTopic()">S'abonner</button>
+            <button *ngIf="topic.followed" mat-raised-button color="warn" (click)="unfollowTopic()">Se
+                Désabonner</button>
+            <p *ngIf="onError" style="color:red">Désolé, une erreur est survenue</p>
         </div>
     </mat-card-footer>
 </mat-card>

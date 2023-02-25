@@ -15,4 +15,16 @@ export class TopicService {
   getTopics(): Observable<Topic[]> {
     return this.http.get<Topic[]>(this.url);
   }
+
+  followTopic(topicId: number): Observable<any> {
+    return this.http.post<any>(this.url + '/' + topicId + '/follow', null);
+  }
+
+  unfollowTopic(topicId: number): Observable<any> {
+    return this.http.delete<any>(this.url + '/' + topicId + '/follow');
+  }
+
+  getFollowing(): Observable<Topic[]> {
+    return this.http.get<Topic[]>(this.url + '/following');
+  }
 }

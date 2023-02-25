@@ -21,7 +21,7 @@ public class User {
     private String email;
     @JsonIgnore
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_topic", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "topic_id"))
     private List<Topic> following;
 }

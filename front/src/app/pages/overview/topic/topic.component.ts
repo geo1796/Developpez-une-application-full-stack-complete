@@ -10,16 +10,16 @@ import { TopicService } from "src/app/core/service/topic.service";
 })
 export class TopicComponent implements OnInit, OnDestroy {
   screenWidth$ = fromEvent(window, 'resize')
-  .pipe(
-    map(() => window.innerWidth),
-    startWith(window.innerWidth)
-  );
+    .pipe(
+      map(() => window.innerWidth),
+      startWith(window.innerWidth)
+    );
 
   private topicSub!: Subscription;
   public onError: boolean = false;
   public topics: Topic[] = [];
 
-  constructor(private topicService: TopicService){}
+  constructor(private topicService: TopicService) { }
 
   ngOnInit(): void {
     this.topicSub = this.topicService.getTopics().subscribe({

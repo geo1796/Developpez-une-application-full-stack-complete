@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "topics")
@@ -28,5 +29,14 @@ public class Topic {
 
 	@Column(nullable = false)
 	private String description;
-	
+
+	@Override
+	public boolean equals(Object o) {
+		try {
+			Topic other = (Topic) o;
+			return Objects.equals(other.id, this.id);
+		} catch (ClassCastException e) {
+			return false;
+		}
+	}
 }
