@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Comment } from '../payload/response/comment-response';
 import { Post } from '../payload/response/post-response';
 
 @Injectable({
@@ -18,5 +19,9 @@ export class PostService {
 
   getPost(id: number): Observable<Post> {
     return this.http.get<Post>(this.url + '/' + id);
+  }
+
+  getComments(postId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.url + '/' + postId + '/comments');
   }
 }

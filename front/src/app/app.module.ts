@@ -26,6 +26,8 @@ import { TopicItemComponent } from './pages/overview/topic/topic-item/topic-item
 import { PostItemComponent } from './pages/overview/post/post-item/post-item.component';
 import { NewPostComponent } from './pages/new-post/new-post.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
+import { PostCommentsComponent } from './pages/post-details/post-comments/post-comments.component';
+import { PostContentComponent } from './pages/post-details/post-content/post-content.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { PostDetailsComponent } from './pages/post-details/post-details.componen
     TopicItemComponent,
     PostItemComponent,
     NewPostComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    PostCommentsComponent,
+    PostContentComponent
   ],
   imports: [
     HttpClientModule,

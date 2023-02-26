@@ -1,9 +1,11 @@
 package com.openclassrooms.mddapi;
 
 import com.openclassrooms.mddapi.dto.request.RegisterRequest;
+import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.repository.CommentRepository;
 import com.openclassrooms.mddapi.repository.PostRepository;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.service.security.MyUserDetailsService;
@@ -21,9 +23,11 @@ public class MddApiApplication implements CommandLineRunner {
     private TopicRepository topicRepository;
     @Autowired
     private PostRepository postRepository;
-
     @Autowired
     private MyUserDetailsService userDetailsService;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MddApiApplication.class, args);
@@ -58,5 +62,16 @@ public class MddApiApplication implements CommandLineRunner {
         );
 
         postRepository.saveAll(dummyPosts);
+
+        List<Comment> dummyComments = List.of(
+                Comment.builder().content(dummyDescription).post(dummyPosts.get(0)).user(user).build(),
+                Comment.builder().content(dummyDescription).post(dummyPosts.get(0)).user(user).build(),
+                Comment.builder().content(dummyDescription).post(dummyPosts.get(0)).user(user).build(),
+                Comment.builder().content(dummyDescription).post(dummyPosts.get(0)).user(user).build(),
+                Comment.builder().content(dummyDescription).post(dummyPosts.get(0)).user(user).build(),
+                Comment.builder().content(dummyDescription).post(dummyPosts.get(0)).user(user).build()
+        );
+
+        commentRepository.saveAll(dummyComments);
     }
 }

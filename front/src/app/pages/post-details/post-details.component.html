@@ -44,7 +44,7 @@
 
 <ng-template #mainContent>
     <div *ngIf="post !== undefined">
-        <div class="row">
+        <div class="row" *ngIf="(screenWidth$ | async)! >= 1024">
             <div class="col-2 px-1">
                 <button mat-button (click)="goBack()">
                     <mat-icon style="font-size: 2em;">arrow_back</mat-icon>
@@ -52,30 +52,22 @@
             </div>
             <div class="col-9 pt-1">
                 <h1>{{post.name}}</h1>
-                <div class="row my-3" *ngIf="(screenWidth$ | async)! >= 1024">
-                    <div class="col-2">
-                        {{postDate}}
-                    </div>
-                    <div class="col-2">
-                        {{post.author.username}}
-                    </div>
-                    <div class="col-2">
-                        {{post.topic.name}}
-                    </div>
+                <app-post-content [post]="post"></app-post-content>
+            </div>
+        </div>
+        <div class="row" *ngIf="(screenWidth$ | async)! < 1024">
+            <div class="col-2 px-1">
+                <button mat-button (click)="goBack()">
+                    <mat-icon style="font-size: 2em;">arrow_back</mat-icon>
+                </button>
+            </div>
+            <div class="col-10 pt-1">
+                <h1>{{post.name}}</h1>
+            </div>
+            <div class="row m-1">
+                <div class="col-12">
+                    <app-post-content [post]="post"></app-post-content>
                 </div>
-                <div class="row" *ngIf="(screenWidth$ | async)! < 1024">
-                    <div class="col-6">
-                        {{postDate}}
-                    </div>
-                    <div class="col-6">
-                        {{post.author.username}}
-                    </div>
-                    <div class="col-6 my-2">
-                        {{post.topic.name}}
-                    </div>
-                </div>
-                <p>Content: {{post.content}}</p>
-                <hr>
             </div>
         </div>
     </div>
