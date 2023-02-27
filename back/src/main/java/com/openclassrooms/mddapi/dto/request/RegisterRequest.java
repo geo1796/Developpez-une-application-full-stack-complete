@@ -1,17 +1,18 @@
 package com.openclassrooms.mddapi.dto.request;
 
+import com.openclassrooms.mddapi.validation.EmailValidator;
+import com.openclassrooms.mddapi.validation.PasswordValidator;
+import com.openclassrooms.mddapi.validation.UsernameValidator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import javax.validation.constraints.NotBlank;
 
 @Getter
 @AllArgsConstructor
 public class RegisterRequest {
-    @NotBlank
+    @UsernameValidator
     private String username;
-    @NotBlank
+    @EmailValidator
     private String email;
-    @NotBlank
+    @PasswordValidator
     private String password;
 }
