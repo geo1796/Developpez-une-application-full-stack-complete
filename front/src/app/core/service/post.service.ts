@@ -24,4 +24,9 @@ export class PostService {
   getComments(postId: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.url + '/' + postId + '/comments');
   }
+
+  addComment(postId: number, content: string): Observable<Comment> {
+    const body = {'content': content};
+    return this.http.post<Comment>(this.url + '/' + postId + '/comments', body);
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
 import { fromEvent, map, startWith, Subscription } from 'rxjs';
+import { Comment } from 'src/app/core/payload/response/comment-response';
 import { Post } from 'src/app/core/payload/response/post-response';
 import { PostService } from 'src/app/core/service/post.service';
 
@@ -23,6 +24,8 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   private idSub!: Subscription;
   private id: number = 0;
   private onError: boolean = false;
+  public comments: Comment[] = [];
+  private commentSub!: Subscription;
 
   public get postDate(): string {
     return format(Date.parse(this.post!.date), "dd/MM/yyyy");
@@ -42,11 +45,17 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         this.post = data;
       }, error: _ => this.onError = true
     });
+    this.commentSub = this.postService.getComments(this.id).subscribe({
+      next: data => this.comments = data,
+      error: _ => this.onError = true
+    });
+  
   }
 
   ngOnDestroy(): void {
     this.postSub.unsubscribe();
     this.idSub.unsubscribe();
+    this.commentSub.unsubscribe();
   }
 
   public navToOverview(show: string): void {

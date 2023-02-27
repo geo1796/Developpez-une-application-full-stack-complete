@@ -9,7 +9,7 @@ import { Post } from 'src/app/core/payload/response/post-response';
   templateUrl: './post-content.component.html',
   styleUrls: ['./post-content.component.scss']
 })
-export class PostContentComponent implements OnInit {
+export class PostContentComponent {
 
   screenWidth$ = fromEvent(window, 'resize')
     .pipe(
@@ -24,9 +24,6 @@ export class PostContentComponent implements OnInit {
   }
 
   constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   public goBack(): void {
     this.router.navigateByUrl('/overview?show=post');
