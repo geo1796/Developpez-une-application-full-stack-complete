@@ -9,6 +9,8 @@ public interface TopicService {
 
 	List<TopicResponse> getTopics();
 
+	List<TopicResponse> getFollowing();
+
 	Topic getById(Long id);
 
 }

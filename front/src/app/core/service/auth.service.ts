@@ -24,6 +24,11 @@ export class AuthService {
 
   constructor() { }
 
+  public logout(): void {
+    localStorage.clear();
+    this.loggedIn$.next(false);
+  }
+
   public saveLoginResponse(loginResponse: LoginResponse): void {
     localStorage.setItem("access_token", loginResponse.token); //required by auth0 library
     localStorage.setItem("token_expiry", loginResponse.expiry);

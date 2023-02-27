@@ -29,6 +29,12 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
+	public List<TopicResponse> getFollowing() {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return topicMapper.toDto(user.getFollowing(), user);
+	}
+
+	@Override
 	public Topic getById(Long id) {
 		Optional<Topic> topic = topicRepository.findById(id);
 		if (topic.isEmpty()) {

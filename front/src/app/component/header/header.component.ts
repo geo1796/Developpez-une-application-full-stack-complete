@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.router.url.includes('overview?show=post');
   }
 
+  public get onUserProfile(): boolean {
+    return this.router.url.includes('user-profile');
+  }
+
   constructor(private authService: AuthService, private router: Router) {
     this.loggedIn = authService.loggedIn;
   }
@@ -32,8 +36,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loggedInSub.unsubscribe();
   }
 
-  public navToOverview(show: string): void {
-    this.router.navigateByUrl('/overview?show=' + show);
+  public navToPost(): void {
+    this.router.navigateByUrl('/overview?show=post');
   }
 
+  public navToTopic(): void {
+    this.router.navigateByUrl('/overview?show=topic');
+  }
 }

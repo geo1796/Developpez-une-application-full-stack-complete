@@ -60,9 +60,17 @@ body {
     right: 0px;
 }
 
+.form-field {
+    width: 400px;
+}
+
 @media (max-width: 1023px) {
     .logo {
         width: auto;
         height: 50px;
+    }
+
+    .form-field {
+        width: 90vw;
     }
 }

@@ -8,6 +8,7 @@ import { NewPostComponent } from './pages/new-post/new-post.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [unauthGuard] },
   { path: 'overview', component: OverviewComponent, canActivate: [authGuard] },
   { path: 'post-details', component: PostDetailsComponent, canActivate: [authGuard] },
-  { path: 'new-post', component: NewPostComponent, canActivate: [authGuard] }
+  { path: 'new-post', component: NewPostComponent, canActivate: [authGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({

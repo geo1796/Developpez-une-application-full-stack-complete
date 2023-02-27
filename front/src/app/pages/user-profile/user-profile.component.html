@@ -1,0 +1,84 @@
+<div *ngIf="(screenWidth$ | async)! >= 1024">
+    <app-header></app-header>
+    <ng-container *ngTemplateOutlet="mainContent"></ng-container>
+</div>
+
+<div *ngIf="(screenWidth$ | async)! < 1024">
+    <!-- Sidenav -->
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="over" class="sidenav" [fixedInViewport]="true" position="end">
+            <mat-nav-list class="float-end mt-5">
+                <div mat-list-item>
+                    <button mat-button (click)="navToPost(); sidenav.close();">Articles</button>
+                </div>
+                <div mat-list-item>
+                    <button mat-button (click)="navToTopic(); sidenav.close();">Thèmes</button>
+                </div>
+                <div class="profile">
+                    <button mat-fab color="primary" (click)="sidenav.close()" class="mb-2 mx-1">
+                        <mat-icon>person_filled</mat-icon>
+                    </button>
+                </div>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="sidenav-content">
+            <main>
+                <div class="row mt-2 mx-1">
+                    <div class="col">
+                        <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+                    </div>
+                    <div class="col">
+                        <div class="float-end">
+                            <button mat-icon-button (click)="sidenav.toggle()">
+                                <mat-icon>menu</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <ng-container *ngTemplateOutlet="mainContent"></ng-container>
+            </main>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+<ng-template #mainContent>
+    <div class="text-center">
+        <h1>Profil utilisateur</h1>
+        <p *ngIf="onError">Désolé, une erreur est survenue</p>
+    </div>
+
+    <form *ngIf="user !== undefined" [formGroup]="userForm" (submit)="onSubmit()">
+        <div class="row justify-content-center">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput formControlName="username" id="email" type="text">
+            </mat-form-field>
+        </div>
+        <div class="row justify-content-center">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Adresse email</mat-label>
+                <input matInput formControlName="email" id="email" type="text">
+            </mat-form-field>
+        </div>
+        <div class="text-center">
+            <button mat-raised-button color="primary" [disabled]="userForm.invalid">Sauvegarder</button>
+        </div>
+        <div class="text-center">
+            <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <div class="text-center" *ngIf="(screenWidth$ | async)! >= 1024">
+        <h1>Abonnements</h1>
+    </div>
+
+    <mat-grid-list *ngIf="!onError" [cols]="(screenWidth$ | async)! >= 1024 ? 2 : 1" rowHeight="350px"
+        gutterSize="10px">
+        <mat-grid-tile *ngFor="let topic of following">
+            <app-topic-item [topic]="topic" (unfollowed)="unfollowed($event)"></app-topic-item>
+        </mat-grid-tile>
+    </mat-grid-list>
+</ng-template>

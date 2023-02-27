@@ -5,13 +5,13 @@
             <div class="float-end">
                 <div class="row px-5">
                     <div class="col mt-2">
-                        <button mat-button (click)="navToOverview('post')" [color]="onPosts ? 'primary' : ''">Articles</button>
+                        <button mat-button (click)="navToPost()" [color]="onPosts ? 'primary' : ''">Articles</button>
                     </div>
                     <div class="col mt-2">
-                        <button mat-button (click)="navToOverview('topic')" [color]="onTopics ? 'primary' : ''">Thèmes</button>
+                        <button mat-button (click)="navToTopic()" [color]="onTopics ? 'primary' : ''">Thèmes</button>
                     </div>
                     <div class="col">
-                        <button mat-fab color="" class="mb-1">
+                        <button mat-fab routerLink="/user-profile" [color]="onUserProfile ? 'primary' : ''"class="mb-1">
                             <mat-icon>person_filled</mat-icon>
                         </button>
                     </div>

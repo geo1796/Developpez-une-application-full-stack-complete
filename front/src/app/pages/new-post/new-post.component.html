@@ -15,7 +15,7 @@
                     <button mat-button (click)="navToTopic(); sidenav.close();">Thèmes</button>
                 </div>
                 <div class="profile">
-                    <button mat-fab color="" class="mb-2 mx-1">
+                    <button mat-fab color="" routerLink="/user-profile" class="mb-2 mx-1">
                         <mat-icon>person_filled</mat-icon>
                     </button>
                 </div>
@@ -79,7 +79,7 @@
                         l'article requis</mat-error>
                 </mat-form-field>
             </div>
-            <div class="text-center">
+            <div class="text-center pb-5">
                 <button mat-raised-button type="submit" color="primary" [disabled]="postForm.invalid">Créer</button>
             </div>
         </form>

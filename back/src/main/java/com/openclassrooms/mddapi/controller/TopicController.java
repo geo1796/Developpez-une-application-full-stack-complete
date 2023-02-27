@@ -43,8 +43,7 @@ public class TopicController {
 	}
 
 	@GetMapping("/following")
-	public List<Topic> getFollowing() {
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return user.getFollowing();
+	public List<TopicResponse> getFollowing() {
+		return topicService.getFollowing();
 	}
 }

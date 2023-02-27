@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service.impl;
 
+import com.openclassrooms.mddapi.dto.request.UserRequest;
 import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -47,5 +48,12 @@ public class UserServiceImpl implements UserService {
         }
         user.getFollowing().remove(topic);
         userRepository.save(user);
+    }
+
+    @Override
+    public User updateUser(User user, UserRequest userRequest) {
+        user.setEmail(userRequest.getEmail());
+        user.setUsername(userRequest.getUsername());
+        return userRepository.save(user);
     }
 }
