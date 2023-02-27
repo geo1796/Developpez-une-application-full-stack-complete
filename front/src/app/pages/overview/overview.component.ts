@@ -26,8 +26,12 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  public navToOverview(show: string): void {
-    this.router.navigateByUrl('/overview?show=' + show);
+  public navToPost(): void {
+    this.router.navigateByUrl('/overview?show=post');
+  }
+
+  public navToTopic(): void {
+    this.router.navigateByUrl('/overview?show=topic');
   }
 
 }

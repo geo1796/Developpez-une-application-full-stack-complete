@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { format } from 'date-fns';
-import { Post } from 'src/app/core/payload/response/post-response';
+import { Post } from 'src/app/core/model/post';
 
 @Component({
   selector: 'app-post-item',

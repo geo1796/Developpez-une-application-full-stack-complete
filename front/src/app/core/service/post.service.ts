@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Comment } from '../payload/response/comment-response';
-import { Post } from '../payload/response/post-response';
+import { Comment } from '../model/comment';
+import { Post } from '../model/post';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,17 @@ export class PostService {
     return this.http.get<Post>(this.url + '/' + id);
   }
 
+  addPost(topicId: number, name: string, content: string): Observable<any> {
+    const body = { 'topicId': topicId, 'name': name, 'content': content };
+    return this.http.post<any>(this.url, body);
+  }
+
   getComments(postId: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.url + '/' + postId + '/comments');
   }
 
   addComment(postId: number, content: string): Observable<Comment> {
-    const body = {'content': content};
+    const body = { 'content': content };
     return this.http.post<Comment>(this.url + '/' + postId + '/comments', body);
   }
 }

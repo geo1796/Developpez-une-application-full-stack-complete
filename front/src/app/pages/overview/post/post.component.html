@@ -1,7 +1,7 @@
 <div *ngIf="!onError">
     <div class="row m-3">
         <div class="col-sm text-center mt-2">
-            <button mat-raised-button color="primary">Créer un article</button>
+            <button mat-raised-button routerLink="/new-post" color="primary">Créer un article</button>
         </div>
         <div class="col-sm text-center mt-2">
             <button mat-button (click)="sortPosts()">

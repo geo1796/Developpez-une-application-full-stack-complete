@@ -1,1 +1,89 @@
-<p>new-post works!</p>
+<div *ngIf="(screenWidth$ | async)! >= 1024">
+    <app-header></app-header>
+    <ng-container *ngTemplateOutlet="mainContent"></ng-container>
+</div>
+
+<div *ngIf="(screenWidth$ | async)! < 1024">
+    <!-- Sidenav -->
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="over" class="sidenav" [fixedInViewport]="true" position="end">
+            <mat-nav-list class="float-end mt-5">
+                <div mat-list-item>
+                    <button mat-button (click)="navToPost(); sidenav.close();">Articles</button>
+                </div>
+                <div mat-list-item>
+                    <button mat-button (click)="navToTopic(); sidenav.close();">Thèmes</button>
+                </div>
+                <div class="profile">
+                    <button mat-fab color="" class="mb-2 mx-1">
+                        <mat-icon>person_filled</mat-icon>
+                    </button>
+                </div>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="sidenav-content">
+            <main>
+                <div class="row mt-2 mx-1">
+                    <div class="col">
+                        <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+                    </div>
+                    <div class="col">
+                        <div class="float-end">
+                            <button mat-icon-button (click)="sidenav.toggle()">
+                                <mat-icon>menu</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <ng-container *ngTemplateOutlet="mainContent"></ng-container>
+            </main>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+<ng-template #mainContent>
+    <div *ngIf="onError" class="text-center">Désolé, une erreur est survenue</div>
+    <div class="mb-1">
+        <button mat-button (click)="goBack()">
+            <mat-icon style="font-size: 2em;">arrow_back</mat-icon>
+        </button>
+    </div>
+    <div class="text-center">
+        <h1>Créer un nouvel article</h1>
+        <form [formGroup]="postForm" (submit)="onSubmit()">
+            <div class="row justify-content-center">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Sélectionner un thème</mat-label>
+                    <mat-select formControlName="topicId">
+                        <mat-option *ngFor="let topic of topics" [value]="topic.id">{{topic.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="topicControl!.invalid && (topicControl!.dirty || topicControl!.touched)">Thème
+                        requis</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row justify-content-center">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Titre de l'article</mat-label>
+                    <textarea matInput rows="2" formControlName="name" id="name"></textarea>
+                    <mat-error *ngIf="nameControl!.invalid && (nameControl!.dirty || nameControl!.touched)">Titre de
+                        l'article requis</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row justify-content-center">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Contenu de l'article</mat-label>
+                    <textarea matInput rows="10" formControlName="content" id="content"></textarea>
+                    <mat-error
+                        *ngIf="contentControl!.invalid && (contentControl!.dirty || contentControl!.touched)">Contenu de
+                        l'article requis</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="text-center">
+                <button mat-raised-button type="submit" color="primary" [disabled]="postForm.invalid">Créer</button>
+            </div>
+        </form>
+    </div>
+
+
+</ng-template>

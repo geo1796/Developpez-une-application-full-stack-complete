@@ -9,10 +9,10 @@
         <mat-sidenav #sidenav mode="over" class="sidenav" [fixedInViewport]="true" position="end">
             <mat-nav-list class="float-end mt-5">
                 <div mat-list-item>
-                    <button mat-button (click)="navToOverview('post'); sidenav.close();">Articles</button>
+                    <button mat-button (click)="navToPost(); sidenav.close();">Articles</button>
                 </div>
                 <div mat-list-item>
-                    <button mat-button (click)="navToOverview('topic'); sidenav.close();">Thèmes</button>
+                    <button mat-button (click)="navToTopic(); sidenav.close();">Thèmes</button>
                 </div>
                 <div class="profile">
                     <button mat-fab color="" class="mb-2 mx-1">

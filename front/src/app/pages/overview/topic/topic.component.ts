@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { fromEvent, map, startWith, Subscription } from "rxjs";
-import { Topic } from "src/app/core/payload/response/topic-response";
+import { Topic } from "src/app/core/model/topic";
 import { TopicService } from "src/app/core/service/topic.service";
 
 @Component({

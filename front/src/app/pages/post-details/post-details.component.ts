@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { format } from 'date-fns';
 import { fromEvent, map, startWith, Subscription } from 'rxjs';
-import { Comment } from 'src/app/core/payload/response/comment-response';
-import { Post } from 'src/app/core/payload/response/post-response';
+import { Comment } from 'src/app/core/model/comment';
+import { Post } from 'src/app/core/model/post';
 import { PostService } from 'src/app/core/service/post.service';
 
 @Component({
@@ -58,8 +58,12 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     this.commentSub.unsubscribe();
   }
 
-  public navToOverview(show: string): void {
-    this.router.navigateByUrl('/overview?show=' + show);
+  public navToPost(): void {
+    this.router.navigateByUrl('/overview?show=post');
+  }
+
+  public navToTopic(): void {
+    this.router.navigateByUrl('/overview?show=topic');
   }
 
   public goBack(): void {
