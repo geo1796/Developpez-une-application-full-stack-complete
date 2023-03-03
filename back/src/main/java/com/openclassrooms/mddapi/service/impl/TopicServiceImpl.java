@@ -22,18 +22,32 @@ public class TopicServiceImpl implements TopicService {
 	private TopicRepository topicRepository;
 	private TopicMapper topicMapper;
 
+	/**
+	 *
+	 * @return The list of Topic fetched by the repository and mapped to a list of TopicResponse
+	 */
 	@Override
 	public List<TopicResponse> getTopics() {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return topicMapper.toDto(topicRepository.findAll(), user);
 	}
 
+	/**
+	 *
+	 * @return The list of Topic followed by the authenticated User and mapped to a list of Topic Response
+	 */
 	@Override
 	public List<TopicResponse> getFollowing() {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return topicMapper.toDto(user.getFollowing(), user);
 	}
 
+	/**
+	 *
+	 * @param id The id of the Topic to retrieve
+	 * @return The Topic corresponding to the param id
+	 * @throws NotFoundException if there is no Topic corresponding to this id in database
+	 */
 	@Override
 	public Topic getById(Long id) {
 		Optional<Topic> topic = topicRepository.findById(id);
@@ -42,5 +56,4 @@ public class TopicServiceImpl implements TopicService {
 		}
 		return topic.get();
 	}
-
 }

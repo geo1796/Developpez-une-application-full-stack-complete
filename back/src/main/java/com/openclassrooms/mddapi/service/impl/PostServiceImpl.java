@@ -29,11 +29,21 @@ public class PostServiceImpl implements PostService {
     private CommentRepository commentRepository;
     private CommentMapper commentMapper;
 
+    /**
+     *
+     * @return The list of Post fetched by the repository
+     */
     @Override
     public List<Post> getPosts() {
         return postRepository.findAllByOrderByDateDesc();
     }
 
+    /**
+     *
+     * @param id The id of the Post to retrieve
+     * @return The Post corresponding to the param id
+     * @throws NotFoundException if there is no Post corresponding to this id in the database
+     */
     @Override
     public Post getPost(Long id) {
         Optional<Post> post = postRepository.findById(id);
@@ -43,11 +53,22 @@ public class PostServiceImpl implements PostService {
         return post.get();
     }
 
+    /**
+     *
+     * @param postId The id of the Post related to the list of Comment
+     * @return The list of Comment fetched by the repository and mapped to a List of CommentResponse
+     */
     @Override
-    public List<CommentResponse> getComments(Long id) {
-        return commentMapper.toDto(commentRepository.findByPostId(id));
+    public List<CommentResponse> getComments(Long postId) {
+        return commentMapper.toDto(commentRepository.findByPostId(postId));
     }
 
+    /**
+     *
+     * @param postId The id of the Post related to the new Comment
+     * @param commentRequest The dto holding the data of the new Comment
+     * @return The new Comment saved to the database and mapped to a CommentResponse
+     */
     @Override
     public CommentResponse addComment(Long postId, CommentRequest commentRequest) {
         Post post = getPost(postId);
@@ -60,6 +81,11 @@ public class PostServiceImpl implements PostService {
         return commentMapper.toDto(commentRepository.save(comment));
     }
 
+    /**
+     *
+     * @param postRequest The dto holding the data of the new Post
+     * @return The new Post saved to the database
+     */
     @Override
     public Post addPost(PostRequest postRequest) {
         Topic topic = topicService.getById(postRequest.getTopicId());

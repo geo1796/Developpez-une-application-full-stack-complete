@@ -28,6 +28,12 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     *
+     * @param username The username of the User to load
+     * @return The UserDetails corresponding to the param username
+     * @throws UsernameNotFoundException if there is no User in database corresponding to the param username
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
@@ -48,6 +54,11 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         throw new UsernameNotFoundException(String.format("%s not found", username));
     }
 
+    /**
+     *
+     * @param registerRequest the request holding the data of the new User
+     * @return The new User that was created
+     */
     @Override
     public User register(RegisterRequest registerRequest) {
         User newUser = User.builder()
