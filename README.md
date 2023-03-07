@@ -14,12 +14,20 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-### Where to start
+### Libraris
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+The app uses components & theming from Angular Material and css styles provided by Bootstrap 5.
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+In addition, @auth0/angular-jwt is used to implement authentication via Json Web Token.
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+## Back
 
-Good luck!
+This project is based on Spring Boot and uses almost exclusively libraries from the Spring ecosystem like Spring Data JPA, Spring Web MVC & Spring Security.
+In addition, com.auth0.java-jwt is used to implement authentication via Json Web Token.
+
+### Run the app
+
+From the root directory, execute the command : 
+```
+mvn spring-boot:run
+```
